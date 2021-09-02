@@ -18,15 +18,16 @@ def create():
     ds = dataset.isnull().sum()
 
     for index, value in ds.items():
-        if value > 0: 
+        if value > 0:
             if dataset[f"{index}"].dtypes == float:
-                dataset["{index}"].fillna(dataset["{index}"].median(), inplace=True)
+                dataset[f"{index}"].fillna(dataset[f"{index}"].median(), inplace=True)
             elif dataset[f"{index}"].dtypes == int:
-                dataset["{index}"].fillna(dataset["{index}"].median(), inplace=True)
+                dataset[f"{index}"].fillna(dataset[f"{index}"].median(), inplace=True)
             elif dataset[f"{index}"].dtypes == object:
-                dataset["{index}"].fillna(dataset["{index}"].mode(), inplace=True)
+                dataset[f"{index}"].fillna(dataset[f"{index}"].mode()[0], inplace=True)
                 
-    if ds.sum != 0:
+    if dataset.isnull().sum().sum() != 0:
+        print(ds)
         raise ValueError("you still still have some unfilled spaces")
 
     #Divide into test and train:
@@ -40,19 +41,18 @@ def create():
     y=train["Loan_Status"]
 
     X = pd.get_dummies(X,drop_first=True)
-    X.head()
 
     x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=0)
     
     LR_Model = LogisticRegression(max_iter=1000,random_state=0)
     LR_Model.fit(x_train,y_train)
 
-    y_pred =  LR_Model.predict(x_test)
+    #y_pred =  LR_Model.predict(x_test)
 
-    Xt = test.drop(["loan_id", "loan_status"],axis=1)
+    Xt = test.drop(["Loan_ID", "Loan_Status"],axis=1)
     Xt = pd.get_dummies(Xt,drop_first=True)
 
-    prediction =  LR_Model.predict(Xt)
+    #prediction =  LR_Model.predict(Xt)
 
     Pkl_Filename = "Pickle_RL_Model.pkl"  
 

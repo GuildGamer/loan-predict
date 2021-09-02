@@ -13,15 +13,14 @@ from .predict import loanpredictfunc
 from .create_model import create
 import os.path
 
-@api_view['POST']
+@api_view(['POST'])
 def predict_view(request):
     serializer = ObservationSerializer(data=request.data)
-    serializer.validated_data['loan_status'] = None
     serializer.is_valid(raise_exception=True)
     try:
         if os.path.isfile('Pickle_RL_Model.pkl') == False:
             create()
-        response = loanpredictfunc(serializer)
+        response = loanpredictfunc(serializer.data)
         Response(response, status=status.HTTP_200_OK)
         serializer.save()
     except ValidationError as e:
