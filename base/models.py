@@ -16,11 +16,6 @@ EDUCATION_STATUS = (
     ('Not Graduate', 'not_graduate')
 )
 
-PROPERTY_AREA = (
-    ('Urban', 'urban'),
-    ('Rural', 'rural')
-)
-
 class Observation(models.Model):
     Loan_ID= models.CharField(max_length=255)
     Gender = models.CharField(choices=GENDER, max_length=6)	
@@ -33,7 +28,6 @@ class Observation(models.Model):
     LoanAmount = models.BigIntegerField()
     Loan_Amount_Term = models.BigIntegerField()	
     Credit_History = models.FloatField()
-    Property_Area = models.CharField(choices=PROPERTY_AREA, max_length=5)
 
     def __str__(self):
         return self.Loan_ID

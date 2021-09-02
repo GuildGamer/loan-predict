@@ -37,6 +37,8 @@ def create():
     #Drop unnecessary columns:
     test.drop(['source'],axis=1,inplace=True)
     train.drop(['source'],axis=1,inplace=True)
+    test.drop(['Property_Area'],axis=1,inplace=True)
+    train.drop(['Property_Area'],axis=1,inplace=True)
 
     X=train.drop(["Loan_Status",'Loan_ID'],axis=1)
     y=train["Loan_Status"]
@@ -56,9 +58,7 @@ def create():
 
     le = LabelEncoder()
 
-    X['Property_Area'] = le.fit_transform(X['Property_Area'])
     X['Dependents'] = le.fit_transform(X['Dependents'])
-
 
     x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=0)
     

@@ -1,0 +1,32 @@
+# Attributes for both loan-test.csv and loan-train.csv datasets:
+Loan_ID: Unique ID for loan request(dtype: str)
+
+Gender: Gender of applicant(dtype:str, values(binary): "Male" or "Female")
+
+Married: Number of dependents applicant(dtype:int)
+
+Education: Education level of applicant(dtype:str, values(binary): "Graduate" or "Not Graduate")
+
+Self_Employed: If the applicant is self employed or not(dtype:str, values(binary): "Yes" or "note")
+
+Applicant_Income: Yearly inclome of applicant(dtype:float)
+
+Coapplicant_Income: Yearly inclome of coapplicant(dtype:float)
+
+LoanAmount: Amount requested(dtype:float)
+
+Loan_Amount_Term: Loan amount term agreed upon in days(dtype:float)
+
+Credit_History: Credit history of applicant(dtype:float)
+
+
+
+
+# these grades are related with the course subject, Math or Portuguese:
+31 G1 - first period grade (numeric: from 0 to 20)
+31 G2 - second period grade (numeric: from 0 to 20)
+32 G3 - final grade (numeric: from 0 to 20, output target)
+
+Additional note: there are several (382) students that belong to both datasets . 
+These students can be identified by searching for identical attributes
+that characterize each student, as shown in the annexed R file.

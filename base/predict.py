@@ -23,8 +23,6 @@ def loanpredictfunc(data):
     categorical_d = {'Graduate': 1, 'Not Graduate': 0}
     df['Education'] = df['Education'].map(categorical_d)
 
-    categorical_d = {'Urban': 2, 'SemiUrban': 1, 'Rural': 0}
-    df['Property_Area'] = df['Property_Area'].map(categorical_d)
 
     df.drop(['Loan_ID'],axis=1, inplace=True)
     
