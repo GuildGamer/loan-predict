@@ -19,14 +19,4 @@ Loan_Amount_Term: Loan amount term agreed upon in days(dtype:float)
 
 Credit_History: Credit history of applicant(dtype:float)
 
-
-
-
-# these grades are related with the course subject, Math or Portuguese:
-31 G1 - first period grade (numeric: from 0 to 20)
-31 G2 - second period grade (numeric: from 0 to 20)
-32 G3 - final grade (numeric: from 0 to 20, output target)
-
-Additional note: there are several (382) students that belong to both datasets . 
-These students can be identified by searching for identical attributes
-that characterize each student, as shown in the annexed R file.
+response data: Loan Status comes in a binary formart i.e "Y" - predicting that the applicant will not default or "N" - predicting that the applicant will default
