@@ -13,7 +13,7 @@ YES_OR_NO = (
 
 EDUCATION_STATUS = (
     ('Graduate', 'graduate'),
-    ('Not', 'not')
+    ('Not Graduate', 'not_graduate')
 )
 
 PROPERTY_AREA = (
@@ -26,7 +26,7 @@ class Observation(models.Model):
     Gender = models.CharField(choices=GENDER, max_length=6)	
     Married	= models.CharField(choices=YES_OR_NO, max_length=3)
     Dependents = models.IntegerField()
-    Education = models.CharField(choices=EDUCATION_STATUS, max_length=8)
+    Education = models.CharField(choices=EDUCATION_STATUS, max_length=12)
     Self_Employed = models.CharField(choices=YES_OR_NO, max_length=3)
     ApplicantIncome = models.BigIntegerField() 
     CoapplicantIncome = models.BigIntegerField() 

@@ -12,7 +12,23 @@ def loanpredictfunc(data):
     v_data = [data,]
     df = pd.DataFrame.from_dict(v_data)
     df.drop(['Loan_ID'],axis=1)
-    
-    loan_status_predict = Pickled_LR_Model.predict(df)  
 
-    return({'loan_id': data['Loan_ID'], 'loan_status':loan_status_predict})
+    categorical_d = {'Male': 1, 'Female': 0}
+    df['Gender'] = df['Gender'].map(categorical_d)
+
+    categorical_d = {'Yes': 1, 'No': 0}
+    df['Married'] = df['Married'].map(categorical_d)
+    df['Self_Employed'] = df['Self_Employed'].map(categorical_d)
+
+    categorical_d = {'Graduate': 1, 'Not Graduate': 0}
+    df['Education'] = df['Education'].map(categorical_d)
+
+    categorical_d = {'Urban': 2, 'SemiUrban': 1, 'Rural': 0}
+    df['Property_Area'] = df['Property_Area'].map(categorical_d)
+
+    df.drop(['Loan_ID'],axis=1, inplace=True)
+    
+    loan_status_predict = Pickled_LR_Model.predict(df)
+    print(loan_status_predict)  
+
+    return({'loan_id': data['Loan_ID'], 'loan_status':loan_status_predict[0]})

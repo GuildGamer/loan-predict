@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import LabelEncoder
 import pickle
 
 def create():
@@ -42,17 +43,27 @@ def create():
 
     X = pd.get_dummies(X,drop_first=True)
 
+    X = test.drop(["Loan_Status","Loan_ID"],axis=1)
+    categorical_d = {'Male': 1, 'Female': 0}
+    X['Gender'] = X['Gender'].map(categorical_d)
+
+    categorical_d = {'Yes': 1, 'No': 0}
+    X['Married'] = X['Married'].map(categorical_d)
+    X['Self_Employed'] = X['Self_Employed'].map(categorical_d)
+
+    categorical_d = {'Graduate': 1, 'Not Graduate': 0}
+    X['Education'] = X['Education'].map(categorical_d)
+
+    le = LabelEncoder()
+
+    X['Property_Area'] = le.fit_transform(X['Property_Area'])
+    X['Dependents'] = le.fit_transform(X['Dependents'])
+
+
     x_train, x_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=0)
     
     LR_Model = LogisticRegression(max_iter=1000,random_state=0)
     LR_Model.fit(x_train,y_train)
-
-    #y_pred =  LR_Model.predict(x_test)
-
-    Xt = test.drop(["Loan_ID", "Loan_Status"],axis=1)
-    Xt = pd.get_dummies(Xt,drop_first=True)
-
-    #prediction =  LR_Model.predict(Xt)
 
     Pkl_Filename = "Pickle_RL_Model.pkl"  
 

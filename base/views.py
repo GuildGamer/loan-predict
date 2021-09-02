@@ -20,8 +20,10 @@ def predict_view(request):
     try:
         if os.path.isfile('Pickle_RL_Model.pkl') == False:
             create()
-        response = loanpredictfunc(serializer.data)
-        Response(response, status=status.HTTP_200_OK)
+        response = loanpredictfunc(serializer.validated_data)
+        stat=status.HTTP_200_OK
         serializer.save()
     except ValidationError as e:
-        Response(e, status=status.HTTP_400_BAD_REQUEST)
+        response = e 
+        stat=status.HTTP_400_BAD_REQUEST
+    return Response(response, stat)
