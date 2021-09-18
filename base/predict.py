@@ -26,7 +26,8 @@ def loanpredictfunc(data):
 
     df.drop(['Loan_ID'],axis=1, inplace=True)
     
-    loan_status_predict = Pickled_LR_Model.predict(df)
+    loan_status_predict = Pickled_LR_Model.predict_proba(df)[:,1] * 100
+
     print(loan_status_predict)  
 
-    return({'loan_id': data['Loan_ID'], 'loan_status':loan_status_predict[0]})
+    return({'loan_id': data['Loan_ID'], 'credit_score':loan_status_predict[0]})
